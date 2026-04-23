@@ -427,18 +427,19 @@ if run_btn and not _mf_missing:
         # ── Decision ──────────────────────────────────────────────────────────
         if hard_fails:
             decision = "NOT READY TO FLY"
-        elif (not math.isnan(margin_pct)
-              and margin_pct >= 20.0
-              and payload_feas != "OVERLOADED"):
-            decision = "READY TO FLY"
-        elif len(risk_flags) >= 2:
-            decision = "READY WITH RISK"
-        else:
-            decision = "READY TO FLY"
-
-        if engine_base == "NOT READY TO FLY" and decision != "NOT READY TO FLY":
+        
+        elif not math.isnan(margin_pct):
+            if margin_pct >= 20.0:
+                decision = "READY TO FLY"
+            elif margin_pct > 0.0:
+                decision = "READY WITH RISK"
+            else:
+                decision = "NOT READY TO FLY"
+        
+        elif payload_feas == "OVERLOADED":
             decision = "NOT READY TO FLY"
-        elif engine_base == "READY WITH RISK" and decision == "READY TO FLY":
+        
+        else:
             decision = "READY WITH RISK"
 
         # ── Confirmed constraints ─────────────────────────────────────────────
