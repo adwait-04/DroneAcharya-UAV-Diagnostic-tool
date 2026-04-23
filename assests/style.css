@@ -1,0 +1,350 @@
+/* =========================================================
+   DroneAcharya UAV Diagnostic Suite — Style
+   Light theme · Red & white accent palette
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+/* ── Animations ── */
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(-12px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-6px); }
+}
+
+@keyframes pulse-ring {
+    0%   { box-shadow: 0 0 0 0   rgba(220,38,38,.30); }
+    70%  { box-shadow: 0 0 0 10px rgba(220,38,38,.00); }
+    100% { box-shadow: 0 0 0 0   rgba(220,38,38,.00); }
+}
+
+/* ── Nav Cards ── */
+.nav-card {
+    background: #ffffff;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 1.5rem 1.3rem 1rem;
+    box-shadow: 0 1px 6px rgba(0,0,0,.05);
+    transition: all 0.22s cubic-bezier(.4,0,.2,1);
+    animation: fadeInUp 0.5s ease both;
+    margin-bottom: 0.4rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--nc-grad, linear-gradient(90deg,#e8534a,#e8534a));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.28s ease;
+}
+
+.nav-card:hover::before { transform: scaleX(1); }
+
+.nav-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(220,38,38,.12);
+    border-color: #f4a4a0;
+}
+
+.nc-health  { --nc-grad: linear-gradient(90deg,#e8534a,#e8534a); animation-delay:.05s; }
+.nc-tuning  { --nc-grad: linear-gradient(90deg,#d94040,#e8534a); animation-delay:.10s; }
+.nc-mission { --nc-grad: linear-gradient(90deg,#c94848,#d94040); animation-delay:.15s; }
+.nc-about   { --nc-grad: linear-gradient(90deg,#b84040,#c94848); animation-delay:.20s; }
+
+.nav-card-icon {
+    font-size: 1.8rem;
+    margin-bottom: 0.55rem;
+    display: block;
+    animation: float 3.5s ease-in-out infinite;
+}
+
+.nc-tuning  .nav-card-icon { animation-delay:.5s; }
+.nc-mission .nav-card-icon { animation-delay:1.0s; }
+.nc-about   .nav-card-icon { animation-delay:1.5s; }
+
+.nav-card-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 0.3rem;
+}
+
+.nav-card-desc {
+    font-size: 0.8rem;
+    color: #6b7280;
+    line-height: 1.55;
+    margin-bottom: 0.4rem;
+}
+
+/* ── Quickstart step cards ── */
+.step-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1.1rem 1rem;
+    text-align: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,.05);
+    transition: all 0.22s ease;
+    animation: fadeInUp 0.55s ease both;
+    height: 100%;
+}
+
+.step-card:hover {
+    box-shadow: 0 6px 20px rgba(220,38,38,.10);
+    border-color: #f4a4a0;
+    transform: translateY(-3px);
+}
+
+.step-num {
+    font-size: 0.63rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.10em;
+    color: #9ca3af;
+    margin-bottom: 4px;
+}
+
+.step-icon { font-size: 1.5rem; margin: 6px 0; }
+
+.step-title {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 4px;
+}
+
+.step-desc {
+    font-size: 0.75rem;
+    color: #6b7280;
+    line-height: 1.5;
+}
+
+/* ── Score Card ── */
+.score-card {
+    background: linear-gradient(135deg, #b84040 0%, #e8534a 100%);
+    border-radius: 14px;
+    padding: 1.6rem 1.2rem;
+    text-align: center;
+    color: white;
+    box-shadow: 0 8px 28px rgba(220,38,38,.28);
+    animation: fadeInUp 0.5s ease both;
+    position: relative;
+    overflow: hidden;
+}
+
+.score-card::after {
+    content: '';
+    position: absolute;
+    top: -30%; right: -15%;
+    width: 160px; height: 160px;
+    background: rgba(255,255,255,.06);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.score-value {
+    font-size: 3rem;
+    font-weight: 900;
+    line-height: 1;
+    animation: pulse-ring 2.5s ease-in-out infinite;
+    display: block;
+}
+
+.score-good .score-value { color: #86efac; }
+.score-warn .score-value { color: #fde047; }
+.score-bad  .score-value { color: #f4a4a0; }
+
+.score-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0.65;
+    margin-top: 8px;
+    display: block;
+}
+
+/* ── Hero badge (used in sub-pages) ── */
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #fdecea;
+    color: #d94040;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 4px 14px;
+    border-radius: 999px;
+    margin-bottom: 0.9rem;
+    letter-spacing: 0.05em;
+    animation: slideDown 0.45s ease both;
+}
+
+/* ── Section headers ── */
+.section-header {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #e8534a;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid #fdecea;
+    margin-bottom: 0.9rem;
+    animation: slideDown 0.4s ease both;
+}
+
+/* ── Report header banner ── */
+.report-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.9rem 1.4rem;
+    background: linear-gradient(135deg, #b84040, #e8534a);
+    border-radius: 12px;
+    color: white;
+    margin-bottom: 1.25rem;
+    animation: slideDown 0.45s ease both;
+}
+
+.report-header .title { font-weight: 700; font-size: 1rem; }
+.report-header .meta  { font-size: 0.8rem; opacity: 0.7; }
+
+/* ── Alert chips ── */
+.alert-critical {
+    background: #fef2f2;
+    border-left: 4px solid #e8534a;
+    padding: 0.6rem 0.85rem;
+    border-radius: 0 6px 6px 0;
+    margin: 0.35rem 0;
+    color: #b84040;
+    font-size: 0.83rem;
+    animation: fadeInLeft 0.4s ease both;
+}
+
+.alert-warning {
+    background: #fffbeb;
+    border-left: 4px solid #d97706;
+    padding: 0.6rem 0.85rem;
+    border-radius: 0 6px 6px 0;
+    margin: 0.35rem 0;
+    color: #78350f;
+    font-size: 0.83rem;
+    animation: fadeInLeft 0.4s ease both;
+}
+
+.alert-info {
+    background: #fff7f7;
+    border-left: 4px solid #e8534a;
+    padding: 0.6rem 0.85rem;
+    border-radius: 0 6px 6px 0;
+    margin: 0.35rem 0;
+    color: #b84040;
+    font-size: 0.83rem;
+    animation: fadeInLeft 0.4s ease both;
+}
+
+/* ── Streamlit widget polish ── */
+div[data-testid="stMetric"] {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 0.85rem 1rem !important;
+    box-shadow: 0 1px 4px rgba(0,0,0,.05);
+    transition: all 0.2s ease;
+}
+
+div[data-testid="stMetric"]:hover {
+    box-shadow: 0 5px 16px rgba(220,38,38,.10);
+    border-color: #f4a4a0;
+    transform: translateY(-2px);
+}
+
+.stDataFrame { border-radius: 10px !important; overflow: hidden; }
+
+.stExpander {
+    border: 1px solid #e5e7eb !important;
+    border-radius: 10px !important;
+}
+
+/* ── Page link buttons ── */
+a[data-testid="stPageLink-NavLink"] {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #e8534a !important;
+    color: #ffffff !important;
+    border-radius: 8px !important;
+    padding: 0.55rem 1rem !important;
+    font-weight: 600 !important;
+    font-size: 0.88rem !important;
+    text-decoration: none !important;
+    transition: all 0.22s ease !important;
+    box-shadow: 0 2px 8px rgba(220,38,38,.28) !important;
+    margin-top: 0.5rem !important;
+    width: 100% !important;
+}
+
+a[data-testid="stPageLink-NavLink"]:hover {
+    background: #d94040 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(220,38,38,.38) !important;
+}
+
+/* ── Sidebar nav links ── */
+section[data-testid="stSidebar"] a[data-testid="stPageLink-NavLink"] {
+    background: transparent !important;
+    color: #374151 !important;
+    box-shadow: none !important;
+    font-weight: 500 !important;
+    padding: 0.4rem 0.6rem !important;
+    margin-top: 2px !important;
+}
+
+section[data-testid="stSidebar"] a[data-testid="stPageLink-NavLink"]:hover {
+    background: #fdecea !important;
+    color: #d94040 !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* ═══════════════════════════════════════════════
+   PRINT — clean PDF export
+   ═══════════════════════════════════════════════ */
+@media print {
+    section[data-testid="stSidebar"],
+    .stButton, .stFileUploader,
+    [data-testid="stToolbar"],
+    [data-testid="stDecoration"],
+    header[data-testid="stHeader"]  { display: none !important; }
+
+    .nav-card, .step-card {
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+        page-break-inside: avoid;
+    }
+
+    @page { margin: 1.5cm 2cm; size: A4 portrait; }
+}
+
+/* Hide Streamlit auto-generated sidebar page list */
+[data-testid="stSidebarNavItems"],
+[data-testid="stSidebarNavSeparator"] { display: none !important; }
