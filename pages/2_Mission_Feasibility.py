@@ -398,8 +398,8 @@ if run_btn and not _mf_missing:
 
         if mf_duration > 0 and not math.isnan(flight_h) and physics_basis == "transit":
             avail_min = flight_h * 60.0
-            if mf_duration <= avail_min < mf_duration * 1.25 and not hard_fails:
-                risk_flags.append("Required duration consumes most of the available energy budget — no margin for delays")
+            if mf_duration >= avail_min * 0.9 and not hard_fails:
+                risk_flags.append("Required duration is within 10% of maximum transit endurance — margin is critically tight")
 
         model_errors: list = []
         for _a in engine_alerts:
