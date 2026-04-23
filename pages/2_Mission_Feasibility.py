@@ -363,6 +363,9 @@ if run_btn and not _mf_missing:
             if avail_min < mf_duration:
                 hard_fails.append("Required flight duration exceeds available energy endurance")
 
+        if mf_distance > 0 and not math.isnan(range_km) and mf_distance > range_km:
+            hard_fails.append("Required mission distance exceeds maximum achievable range")
+
         # ── Risk flags → READY WITH RISK ─────────────────────────────────────
         risk_flags = []
 
@@ -400,6 +403,9 @@ if run_btn and not _mf_missing:
             avail_min = flight_h * 60.0
             if mf_duration >= avail_min * 0.9 and not hard_fails:
                 risk_flags.append("Required duration is within 10% of maximum transit endurance — margin is critically tight")
+
+        if mf_distance > 0 and not math.isnan(range_km) and mf_distance >= range_km * 0.9 and not hard_fails:
+            risk_flags.append("Required distance is within 10% of maximum achievable range — margin is critically tight")
 
         model_errors: list = []
         for _a in engine_alerts:
@@ -849,3 +855,4 @@ with st.expander("📊  Physics Detail", expanded=False):
 
 st.markdown("---")
 st.caption("DroneAcharya Mission Feasibility · Physics-driven pre-flight decision · Actuator disk model")
+
