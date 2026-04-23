@@ -369,11 +369,13 @@ if run_btn and not _mf_missing:
         # ── Risk flags → READY WITH RISK ─────────────────────────────────────
         risk_flags = []
 
-        if energy_feas == "MARGINAL":
-            risk_flags.append("Energy margin is below the 20% safe-operating threshold")
+        if not math.isnan(margin_pct) and margin_pct < 10.0:
+            risk_flags.append("Energy margin is critically low (<10%) — minimal buffer for disturbances")
+        elif not math.isnan(margin_pct) and margin_pct < 20.0:
+            risk_flags.append("Energy margin is below recommended safe-operating threshold (20%)")
 
-        if energy_feas == "BORDERLINE" and "Harsh" not in mf_env:
-            risk_flags.append("Energy margin is critically low — no buffer for unplanned deviations")
+        if energy_feas == "INFEASIBLE":
+            hard_fails.append("Battery energy is insufficient for the stated mission requirements")
 
         if "WIND" in env_risk:
             risk_flags.append("Wind speed exceeds 50% of cruise speed — actual consumption will exceed the modelled budget")
