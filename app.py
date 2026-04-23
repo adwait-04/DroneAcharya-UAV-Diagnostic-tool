@@ -100,7 +100,7 @@ def main() -> None:
             st.info("🧠 Memory: active")
 
     # ── Hero: logo + brand ────────────────────────────────────────────────────
-    logo_path = _ROOT / "assests" / "logo.jpg"
+    logo_path = _ROOT / "assests" / "logo.webp"
     hero_left, hero_right = st.columns([1, 3], vertical_alignment="center")
     with hero_left:
         if logo_path.exists():
